@@ -39,8 +39,10 @@ class Test_Sauce:
         actions.perform()#perform demezsek zincir oluşturulur ama çalıştırılmaz
         # usernameInput.send_keys("standard_user")
         # passwordInput.send_keys("secret_sauce")
-        loginBtn=self.driver.find_element(By.ID,"login-button")
+        loginBtn=self.driver.find_element(By.ID,"login-button")#javascript kod selenium içinde yazıldı. sayfayı aşağı kaydırır
         loginBtn.click()
+        sleep(5)
+        self.driver.execute_script("window.scrollTo(0,500)")
         sleep(500)
         
 
