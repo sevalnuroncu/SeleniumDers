@@ -32,8 +32,13 @@ class Test_Sauce:
         usernameInput=self.driver.find_element(By.ID,"user-name")
         WebDriverWait(self.driver,5).until(ec.visibility_of_all_elements_located((By.ID,"password")))
         passwordInput=self.driver.find_element(By.ID,"password")
-        usernameInput.send_keys("standard_user")
-        passwordInput.send_keys("secret_sauce")
+        # Action Chains
+        actions=ActionChains(self.driver)
+        actions.send_keys_to_element(usernameInput, "standard_user")
+        actions.send_keys_to_element(passwordInput,"secret_sauce")#username ve password artık birlikte execute edilebiilir
+        actions.perform()#perform demezsek zincir oluşturulur ama çalıştırılmaz
+        # usernameInput.send_keys("standard_user")
+        # passwordInput.send_keys("secret_sauce")
         loginBtn=self.driver.find_element(By.ID,"login-button")
         loginBtn.click()
         sleep(500)
