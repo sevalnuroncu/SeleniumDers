@@ -28,18 +28,18 @@ class Test_DemoClass:
     def test_demo2(self):
         assert True
 
-    @pytest.mark.skip()
-    def test_invalid_login(self):
+    @pytest.mark.parametrize("username,password",[("1","1"),("kullaniciadim","sifrem")])
+    def test_invalid_login(self,username,password):
         WebDriverWait(self.driver,5).until(ec.visibility_of_all_elements_located((By.ID,"user-name")))
         usernameInput=self.driver.find_element(By.ID,"user-name")
         WebDriverWait(self.driver,5).until(ec.visibility_of_all_elements_located((By.ID,"password")))
         passwordInput=self.driver.find_element(By.ID,"password")
-        usernameInput.send_keys("1")
-        passwordInput.send_keys("1")
+        usernameInput.send_keys(username)
+        passwordInput.send_keys(password)
         loginBtn=self.driver.find_element(By.ID,"login-button")
         loginBtn.click()
         errorMessage=self.driver.find_element(By.XPATH,"/html/body/div/div/div[2]/div[1]/div/div/form/div[3]/h3")
         assert errorMessage.text == "Epic sadface: Username and password do not match any user in this service"
-        sleep(10)
+        sleep(5)
         
 
