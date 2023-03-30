@@ -41,6 +41,8 @@ class Test_Sauce:
         # passwordInput.send_keys("secret_sauce")
         loginBtn=self.driver.find_element(By.ID,"login-button")
         loginBtn.click()
+        sleep(5)
+        self.driver.execute_script("window.scrollTo(0,500)")
         sleep(500)
         
 
