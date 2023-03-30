@@ -7,11 +7,14 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
 
 class Test_Sauce:
-
-    def test_invalid_login(self):
+    def initializerDriver(self):
         driver=webdriver.Chrome(ChromeDriverManager().install())
         driver.maximize_window()
         driver.get("https://www.saucedemo.com/")
+        return driver
+    
+    def test_invalid_login(self):
+        driver=self.initializerDriver()
         #en fazla 5 sn olacak şekilde user-name id'li elementin görünmesini bekle
         WebDriverWait(driver,5).until(ec.visibility_of_all_elements_located((By.ID,"user-name")))
         usernameInput=driver.find_element(By.ID,"user-name")
@@ -26,9 +29,7 @@ class Test_Sauce:
         print(f"TEST SONUCU: {testResult}")
     
     def test_valid_login(self):
-        driver=webdriver.Chrome(ChromeDriverManager().install())
-        driver.maximize_window()
-        driver.get("https://www.saucedemo.com/")
+        driver=self.initializerDriver()
         WebDriverWait(driver,5).until(ec.visibility_of_all_elements_located((By.ID,"user-name")))
         usernameInput=driver.find_element(By.ID,"user-name")
         WebDriverWait(driver,5).until(ec.visibility_of_all_elements_located((By.ID,"password")))
