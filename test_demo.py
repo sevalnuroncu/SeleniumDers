@@ -8,6 +8,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 import pytest
 from pathlib import Path
 from datetime import date
+import openpyxl
 
 class Test_DemoClass:
     # her testeten önce çağrılır
@@ -33,8 +34,12 @@ class Test_DemoClass:
     #setup -> test_demo2 -> teardown
     def test_demo2(self):
         assert True
+    
+    def getData():
+        #veriyi al
+        return [("1","1"),("kullaniciadim","sifrem"),("kodlamaio","123")]
 
-    @pytest.mark.parametrize("username,password",[("1","1"),("kullaniciadim","sifrem")])
+    @pytest.mark.parametrize("username,password", getData())
     def test_invalid_login(self,username,password):
         # WebDriverWait(self.driver,5).until(ec.visibility_of_all_elements_located((By.ID,"user-name")))
         self.waitForElementVisible((By.ID,"user-name"))
