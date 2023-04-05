@@ -37,8 +37,17 @@ class Test_DemoClass:
     
     def getData():
         #veriyi al
-        return [("1","1"),("kullaniciadim","sifrem"),("kodlamaio","123")]
-
+        excelFile=openpyxl.load_workbook("data/invalid_login.xlsx")
+        selectedSheet=excelFile["Sayfa1"]
+        totalRows=selectedSheet.max_row
+        data=[]
+        for i in range(2,totalRows+1):
+            username=selectedSheet.cell(i,1).value
+            password=selectedSheet.cell(i,2).value
+            tupleData=(username,password)
+            data.append(tupleData)
+        return data
+    
     @pytest.mark.parametrize("username,password", getData())
     def test_invalid_login(self,username,password):
         # WebDriverWait(self.driver,5).until(ec.visibility_of_all_elements_located((By.ID,"user-name")))
